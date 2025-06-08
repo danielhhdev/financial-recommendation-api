@@ -47,13 +47,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-starter-model-openai</artifactId>
-		</dependency>
-
-		<!-- IA -->
-		<dependency>
-			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-autoconfigure-model-openai</artifactId>
+			<artifactId>spring-ai-starter-model-ollama</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 
 		<!-- TOOLS -->

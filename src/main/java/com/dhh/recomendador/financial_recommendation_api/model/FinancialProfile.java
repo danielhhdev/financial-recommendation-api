@@ -25,7 +25,7 @@ public class FinancialProfile {
     private UUID id;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "users_id")
     private User user;
 
     @Column(columnDefinition = "TEXT")
