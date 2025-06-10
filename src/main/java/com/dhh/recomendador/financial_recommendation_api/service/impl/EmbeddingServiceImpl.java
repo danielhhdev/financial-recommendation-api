@@ -1,8 +1,6 @@
 package com.dhh.recomendador.financial_recommendation_api.service.impl;
 
 import com.dhh.recomendador.financial_recommendation_api.service.EmbeddingService;
-
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.stereotype.Service;
