@@ -37,6 +37,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+
     public List<ProductDTO> getAllProducts() {
         log.info("Se buscan todos los usuarios");
         return productRepository.findAll().stream()
