@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProducts() {
+    public List<Product> getAllProducts() { 
         log.info("Se buscan todos los usuarios");
         return productRepository.findAll();
     }
