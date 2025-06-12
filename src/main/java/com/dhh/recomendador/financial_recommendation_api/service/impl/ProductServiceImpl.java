@@ -1,7 +1,9 @@
 package com.dhh.recomendador.financial_recommendation_api.service.impl;
 
 
+import com.dhh.recomendador.financial_recommendation_api.mapper.ProductMapper;
 import com.dhh.recomendador.financial_recommendation_api.model.Product;
+import com.dhh.recomendador.financial_recommendation_api.model.dto.ProductDTO;
 import com.dhh.recomendador.financial_recommendation_api.repository.ProductRepository;
 import com.dhh.recomendador.financial_recommendation_api.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -18,35 +20,41 @@ import java.util.UUID;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
     @Override
-    public Product createProduct(Product product) {
+    public ProductDTO createProduct(ProductDTO product) {
         log.info("Se guarda el producto: {}", product.toString());
-        return productRepository.save(product);
+        Product entity = productMapper.toEntity(product);
+        Product saved = productRepository.save(entity);
+        return productMapper.toDto(saved);
     }
 
     @Override
-    public Optional<Product> getProductById(UUID id) {
+    public Optional<ProductDTO> getProductById(UUID id) {
         log.info("Se busca el usuario con id: {}", id);
-        return productRepository.findById(id);
+        return productRepository.findById(id).map(productMapper::toDto);
     }
 
     @Override
-    public List<Product> getAllProducts() { 
+
+    public List<ProductDTO> getAllProducts() {
         log.info("Se buscan todos los usuarios");
-        return productRepository.findAll();
+        return productRepository.findAll().stream()
+                .map(productMapper::toDto)
+                .toList();
     }
 
     @Override
-    public Product updateProduct(UUID id, Product updatedProduct) {
+    public ProductDTO updateProduct(UUID id, ProductDTO updatedProduct) {
         log.info("Se actualiza el usuario con id: {}", id);
         return productRepository.findById(id)
-                .map(existingProduct -> {
-                    existingProduct.setName(updatedProduct.getName());
-                    existingProduct.setDescription(updatedProduct.getDescription());
-                    // ... otros campos si los hay
-                    return productRepository.save(existingProduct);
+                .map(existing -> {
+                    Product entity = productMapper.toEntity(updatedProduct);
+                    entity.setId(id);
+                    return productRepository.save(entity);
                 })
+                .map(productMapper::toDto)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
     }
 

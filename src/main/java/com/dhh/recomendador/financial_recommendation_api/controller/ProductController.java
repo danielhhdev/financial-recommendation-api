@@ -1,6 +1,6 @@
 package com.dhh.recomendador.financial_recommendation_api.controller;
 
-import com.dhh.recomendador.financial_recommendation_api.model.Product;
+import com.dhh.recomendador.financial_recommendation_api.model.dto.ProductDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -15,19 +15,19 @@ public interface ProductController {
 
     @Operation(summary = "Create a new product", description = "Creates a product and returns it.")
     @PostMapping
-    ResponseEntity<Product> createProduct(@RequestBody Product product);
+    ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO product);
 
     @Operation(summary = "Get product by ID", description = "Retrieves a product by its UUID.")
     @GetMapping("/{id}")
-    ResponseEntity<Product> getProduct(@PathVariable UUID id);
+    ResponseEntity<ProductDTO> getProduct(@PathVariable UUID id);
 
     @Operation(summary = "List all products", description = "Returns all products in the system.")
     @GetMapping
-    ResponseEntity<List<Product>> listProducts();
+    ResponseEntity<List<ProductDTO>> listProducts();
 
     @Operation(summary = "Update product", description = "Updates an existing product by ID.")
     @PutMapping("/{id}")
-    ResponseEntity<Product> updateProduct(@PathVariable UUID id, @RequestBody Product product);
+    ResponseEntity<ProductDTO> updateProduct(@PathVariable UUID id, @RequestBody ProductDTO product);
 
     @Operation(summary = "Delete product", description = "Deletes a product by its UUID.")
     @DeleteMapping("/{id}")

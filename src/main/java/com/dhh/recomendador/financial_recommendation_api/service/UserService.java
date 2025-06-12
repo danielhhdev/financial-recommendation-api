@@ -1,6 +1,6 @@
 package com.dhh.recomendador.financial_recommendation_api.service;
 
-import com.dhh.recomendador.financial_recommendation_api.model.User;
+import com.dhh.recomendador.financial_recommendation_api.model.dto.UserDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,13 +8,13 @@ import java.util.UUID;
 
 public interface UserService {
 
-    User createUser(User user);
+    UserDTO createUser(UserDTO user);
 
-    Optional<User> getUserById(UUID id);
+    Optional<UserDTO> getUserById(UUID id);
 
-    List<User> getAllUsers();
+    List<UserDTO> getAllUsers();
 
-    User updateUser(UUID id, User user);
+    UserDTO updateUser(UUID id, UserDTO user);
 
     void deleteUser(UUID id);
 }
