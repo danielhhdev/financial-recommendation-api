@@ -1,6 +1,8 @@
 package com.dhh.recomendador.financial_recommendation_api.service.impl;
 
+import com.dhh.recomendador.financial_recommendation_api.mapper.UserMapper;
 import com.dhh.recomendador.financial_recommendation_api.model.User;
+import com.dhh.recomendador.financial_recommendation_api.model.dto.UserDTO;
 import com.dhh.recomendador.financial_recommendation_api.repository.UserRepository;
 import com.dhh.recomendador.financial_recommendation_api.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,37 +19,41 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
 
     @Override
-    public User createUser(User user) {
+    public UserDTO createUser(UserDTO user) {
         log.info("Se guarda el usuario: {}", user.toString());
-        // Si necesitas validación extra, agrégala aquí
-        return userRepository.save(user);
+        User entity = userMapper.toEntity(user);
+        User saved = userRepository.save(entity);
+        return userMapper.toDto(saved);
     }
 
     @Override
-    public Optional<User> getUserById(UUID id) {
+    public Optional<UserDTO> getUserById(UUID id) {
         log.info("Se busca el usuario con id: {}", id);
-        return userRepository.findById(id);
+        return userRepository.findById(id).map(userMapper::toDto);
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         log.info("Se buscan todos los usuarios");
-        return userRepository.findAll();
+        return userRepository.findAll().stream()
+                .map(userMapper::toDto)
+                .toList();
     }
 
     @Override
-    public User updateUser(UUID id, User updatedUser) {
+    public UserDTO updateUser(UUID id, UserDTO updatedUser) {
         log.info("Se actualiza el usuario con id: {}", id);
         return userRepository.findById(id)
-                .map(existingUser -> {
-                    existingUser.setName(updatedUser.getName());
-                    existingUser.setEmail(updatedUser.getEmail());
-                    // ... cualquier otro campo que permita actualización
-                    return userRepository.save(existingUser);
+                .map(existing -> {
+                    User entity = userMapper.toEntity(updatedUser);
+                    entity.setId(id);
+                    return userRepository.save(entity);
                 })
+                .map(userMapper::toDto)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     }
 
