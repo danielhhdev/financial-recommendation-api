@@ -1,6 +1,9 @@
 spring:
   application:
     name: recommendationService
+  threads:
+    virtual:
+      enabled: true
   ai:
     ollama:
       base-url: http://localhost:11434      # endpoint local de Ollama
