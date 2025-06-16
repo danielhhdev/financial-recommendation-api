@@ -18,7 +18,7 @@ public class EmbeddingController {
     private final EmbeddingService embeddingService;
 
     @GetMapping
-    public List<Double> getEmbedding(@RequestParam("text") String text) {
+    public Double[] getEmbedding(@RequestParam("text") String text) {
         return embeddingService.generateEmbedding(text);
     }
 }
