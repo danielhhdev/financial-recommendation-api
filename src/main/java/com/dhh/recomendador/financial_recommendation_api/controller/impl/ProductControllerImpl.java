@@ -18,8 +18,8 @@ public class ProductControllerImpl implements ProductController {
 
 
     @Override
-    public ResponseEntity<ProductDTO> createProduct(ProductDTO product) {
-        ProductDTO created = productService.createProduct(product);
+    public ResponseEntity<ProductDTO> createProduct(ProductDTO productDTO) {
+        ProductDTO created = productService.createProduct(productDTO);
         return ResponseEntity.ok(created);
     }
 
@@ -36,8 +36,8 @@ public class ProductControllerImpl implements ProductController {
     }
 
     @Override
-    public ResponseEntity<ProductDTO> updateProduct(UUID id, ProductDTO product) {
-        ProductDTO updated = productService.updateProduct(id, product);
+    public ResponseEntity<ProductDTO> updateProduct(UUID id, ProductDTO productDTO) {
+        ProductDTO updated = productService.updateProduct(id, productDTO);
         return ResponseEntity.ok(updated);
     }
 

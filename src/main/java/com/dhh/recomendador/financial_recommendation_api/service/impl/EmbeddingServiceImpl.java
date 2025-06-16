@@ -1,5 +1,6 @@
 package com.dhh.recomendador.financial_recommendation_api.service.impl;
 
+import com.dhh.recomendador.financial_recommendation_api.model.Product;
 import com.dhh.recomendador.financial_recommendation_api.service.EmbeddingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.embedding.EmbeddingModel;
@@ -21,5 +22,19 @@ public class EmbeddingServiceImpl implements EmbeddingService {
         List<Double> embeddingList = new ArrayList<>(embedding.length);
         for (float v : embedding) embeddingList.add((double) v);
         return embeddingList;
+    }
+
+    public String buildProductText(Product product) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(product.getName()).append(". ");
+        if (product.getDescription() != null) sb.append(product.getDescription()).append(". ");
+        if (product.getType() != null) sb.append("Tipo: ").append(product.getType().toString()).append(". ");
+        if (product.getInterestRate() != null) sb.append("Interés: ").append(product.getInterestRate()).append("%. ");
+        if (product.getFees() != null) sb.append("Comisiones: ").append(product.getFees()).append(". ");
+        if (product.getEligibilityCriteria() != null) sb.append("Requisitos: ").append(product.getEligibilityCriteria()).append(". ");
+        if (product.getRiskLevel() != null) sb.append("Riesgo: ").append(product.getRiskLevel().toString()).append(". ");
+        if (product.getFeatures() != null && !product.getFeatures().isEmpty())
+            sb.append("Características: ").append(String.join(", ", product.getFeatures())).append(". ");
+        return sb.toString();
     }
 }

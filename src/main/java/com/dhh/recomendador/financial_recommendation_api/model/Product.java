@@ -7,6 +7,7 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -52,7 +53,7 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private RiskLevel riskLevel;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> features; // Ventajas/Características
 
     @Column(columnDefinition = "TEXT")

@@ -23,9 +23,9 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
 
     @Override
-    public ProductDTO createProduct(ProductDTO product) {
-        log.info("Se guarda el producto: {}", product.toString());
-        Product entity = productMapper.toEntity(product);
+    public ProductDTO createProduct(ProductDTO productDTO) {
+        log.info("Se guarda el producto: {}", productDTO.toString());
+        Product entity = productMapper.toEntity(productDTO);
         Product saved = productRepository.save(entity);
         return productMapper.toDto(saved);
     }

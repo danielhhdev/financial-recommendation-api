@@ -18,8 +18,8 @@ public class UserControllerImpl implements UserController {
 
 
     @Override
-    public ResponseEntity<UserDTO> createUser(UserDTO user) {
-        UserDTO created = userService.createUser(user);
+    public ResponseEntity<UserDTO> createUser(UserDTO userDTO) {
+        UserDTO created = userService.createUser(userDTO);
         return ResponseEntity.ok(created);
     }
 
@@ -36,8 +36,8 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResponseEntity<UserDTO> updateUser(UUID id, UserDTO user) {
-        UserDTO updated = userService.updateUser(id, user);
+    public ResponseEntity<UserDTO> updateUser(UUID id, UserDTO userDTO) {
+        UserDTO updated = userService.updateUser(id, userDTO);
         return ResponseEntity.ok(updated);
     }
 
