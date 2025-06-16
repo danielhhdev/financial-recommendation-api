@@ -10,7 +10,7 @@ public interface UserService {
 
     UserDTO createUser(UserDTO user);
 
-    Optional<UserDTO> getUserById(UUID id);
+    UserDTO getUserById(UUID id);
 
     List<UserDTO> getAllUsers();
 
