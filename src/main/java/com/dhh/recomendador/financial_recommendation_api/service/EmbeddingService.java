@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface EmbeddingService {
 
-    public List<Double> generateEmbedding(String text);
+    public Double[] generateEmbedding(String text);
     String buildProductText(Product product);
 }

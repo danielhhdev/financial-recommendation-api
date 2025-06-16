@@ -17,11 +17,13 @@ public class EmbeddingServiceImpl implements EmbeddingService {
 
 
     @Override
-    public List<Double> generateEmbedding(String text) {
+    public Double[] generateEmbedding(String text) {
         float[] embedding = embeddingModel.embed(List.of(text)).getFirst();
-        List<Double> embeddingList = new ArrayList<>(embedding.length);
-        for (float v : embedding) embeddingList.add((double) v);
-        return embeddingList;
+        Double[] embeddingArray = new Double[embedding.length];
+        for (int i = 0; i < embedding.length; i++) {
+            embeddingArray[i] = (double) embedding[i];
+        }
+        return embeddingArray;
     }
 
     public String buildProductText(Product product) {

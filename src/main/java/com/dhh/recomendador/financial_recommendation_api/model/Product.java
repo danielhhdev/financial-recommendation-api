@@ -56,8 +56,8 @@ public class Product {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> features; // Ventajas/Características
 
-    @Column(columnDefinition = "TEXT")
-    private String embedding;
+    @Column(columnDefinition = "DOUBLE PRECISION[]")
+    private Double[] embedding;
 
 
 }

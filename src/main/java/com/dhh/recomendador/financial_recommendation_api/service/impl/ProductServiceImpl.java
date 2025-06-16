@@ -28,8 +28,8 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO createProduct(ProductDTO productDTO) {
         log.info("Se guarda el producto: {}", productDTO.toString());
         Product entity = productMapper.toEntity(productDTO);
+        entity.setEmbedding(embeddingService.generateEmbedding(embeddingService.buildProductText(entity)));
         Product saved = productRepository.save(entity);
-        saved.setEmbedding(embeddingService.buildProductText(saved));
         return productMapper.toDto(saved);
     }
 
@@ -55,7 +55,7 @@ public class ProductServiceImpl implements ProductService {
                 .map(existing -> {
                     Product entity = productMapper.toEntity(updatedProduct);
                     entity.setId(id);
-                    entity.setEmbedding(embeddingService.buildProductText(entity));
+                    entity.setEmbedding(embeddingService.generateEmbedding(embeddingService.buildProductText(entity)));
                     return productRepository.save(entity);
                 })
                 .map(productMapper::toDto)

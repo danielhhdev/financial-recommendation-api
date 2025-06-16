@@ -21,8 +21,7 @@ public class ProductEmbeddingInitializer implements ApplicationRunner {
         listProduct.stream()
                 .filter(product -> product.getEmbedding() == null)
                 .forEach(product -> {
-                    var embedding = embeddingService.generateEmbedding(embeddingService.buildProductText(product));
-                    product.setEmbedding(embedding.toString());
+                    product.setEmbedding(embeddingService.generateEmbedding(embeddingService.buildProductText(product)));
                     productRepository.save(product);
                 });
     }

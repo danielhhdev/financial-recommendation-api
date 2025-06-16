@@ -34,7 +34,7 @@ CREATE TABLE products (
     max_amount DOUBLE PRECISION,
     eligibility_criteria VARCHAR(1000),
     risk_level VARCHAR(20),
-    embedding TEXT
+    embedding DOUBLE PRECISION[]
 );
 
 CREATE TABLE product_features (
