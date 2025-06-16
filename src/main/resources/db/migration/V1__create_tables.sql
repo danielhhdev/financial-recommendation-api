@@ -43,12 +43,6 @@ CREATE TABLE product_features (
     PRIMARY KEY (product_id, features)
 );
 
-CREATE TABLE financial_profiles (
-    id UUID PRIMARY KEY,
-    user_id UUID NOT NULL UNIQUE REFERENCES users(id),
-    embedding TEXT
-);
-
 CREATE TABLE recommendations (
     id UUID PRIMARY KEY,
     user_id UUID NOT NULL REFERENCES users(id),
