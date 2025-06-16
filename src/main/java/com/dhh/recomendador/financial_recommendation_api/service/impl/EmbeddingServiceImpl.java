@@ -1,6 +1,7 @@
 package com.dhh.recomendador.financial_recommendation_api.service.impl;
 
 import com.dhh.recomendador.financial_recommendation_api.model.Product;
+import com.dhh.recomendador.financial_recommendation_api.model.User;
 import com.dhh.recomendador.financial_recommendation_api.service.EmbeddingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.embedding.EmbeddingModel;
@@ -37,6 +38,22 @@ public class EmbeddingServiceImpl implements EmbeddingService {
         if (product.getRiskLevel() != null) sb.append("Riesgo: ").append(product.getRiskLevel().toString()).append(". ");
         if (product.getFeatures() != null && !product.getFeatures().isEmpty())
             sb.append("Características: ").append(String.join(", ", product.getFeatures())).append(". ");
+        return sb.toString();
+    }
+
+    public String buildUserText(User user) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(user.getName()).append(". ");
+        if (user.getAge() != null) sb.append("Edad: ").append(user.getAge()).append(". ");
+        if (user.getOccupation() != null) sb.append("Profesión: ").append(user.getOccupation()).append(". ");
+        if (user.getIncome() != null) sb.append("Ingresos: ").append(user.getIncome()).append(". ");
+        if (user.getMaritalStatus() != null) sb.append("Estado civil: ").append(user.getMaritalStatus().toString()).append(". ");
+        if (user.getNumberOfDependents() != null) sb.append("Dependientes: ").append(user.getNumberOfDependents()).append(". ");
+        if (user.getFinancialGoals() != null && !user.getFinancialGoals().isEmpty())
+            sb.append("Objetivos: ").append(String.join(", ", user.getFinancialGoals())).append(". ");
+        if (user.getRiskProfile() != null) sb.append("Perfil de riesgo: ").append(user.getRiskProfile().toString()).append(". ");
+        if (user.getExistingProducts() != null && !user.getExistingProducts().isEmpty())
+            sb.append("Productos contratados: ").append(String.join(", ", user.getExistingProducts())).append(". ");
         return sb.toString();
     }
 }

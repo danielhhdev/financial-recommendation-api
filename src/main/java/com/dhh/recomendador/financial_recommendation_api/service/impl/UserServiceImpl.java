@@ -31,9 +31,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<UserDTO> getUserById(UUID id) {
+    public UserDTO getUserById(UUID id) {
         log.info("Se busca el usuario con id: {}", id);
-        return userRepository.findById(id).map(userMapper::toDto);
+        return userRepository.findById(id).map(userMapper::toDto).orElseThrow();
     }
 
     @Override

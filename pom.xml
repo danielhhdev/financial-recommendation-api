@@ -63,6 +63,11 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>org.nd4j</groupId>
+			<artifactId>nd4j-native</artifactId>
+			<version>1.0.0-M2</version>
+		</dependency>
 
 		<!-- DATABASE -->
 		<dependency>
